@@ -1,13 +1,18 @@
-name: "coastal-carbon-research-coordination-network"
-output_dir: "."
+name: coastal-carbon-research-coordination-network
+output_dir: '.'
 navbar:
-  title: "Coastal Carbon Research Coordination Network"
+  title: Coastal Carbon Research Coordination Network
   left:
-    - text: "Governance Principles"
-      href: index.html
-    - text: "Data Management Principles"
-      href: data_management.html
-    - text: "Controlled Variables"
-      href: Controlled_Variables_and_Vocabulary.html
-    - text: "Join the Network"
-      href: contact.html
+  - text: Governance Principles
+    href: index.html
+  - text: Data Management Plan
+    href: data_management.html
+  - text: Database Structure and Vocabulary
+    href: Controlled_Attributes_and_Variables.html
+  - text: Join the Network
+    href: contact.html
+output:
+  html_document:
+    lib_dir: site_libs
+    self_contained: no
+

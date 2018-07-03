@@ -1,0 +1,175 @@
+table,attribute_name,column_order,manditory,attribute_definition,format_string,units,number,data_type
+a study information,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+a study information,one_liner,2,FALSE,"If this is data the CCRCN curates, the submitter should include a one line description of the study. ",NA,NA,NA,character
+a study information,study_code,3,FALSE,"If this is data the CCRCN curates, the study will be assigned a 128-bit universal unique identifier. Submitters should only include this if it already exists for the data. Otherwise CCRCN personnel will generate this as part of the data ingestion process.",NA,NA,NA,character
+a study information,study_start_date,4,FALSE,Study start date.,YYYY-MM-DD,NA,NA,Date
+a study information,study_end_date,5,FALSE,Study end date.,YYYY-MM-DD,NA,NA,Date
+a study information,title,6,FALSE,"If this is data the CCRCN curates, the submitter should include a study title. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source text.",NA,NA,NA,character
+a study information,abstract,7,FALSE,"If this is data the CCRCN curates, the submitter should include a one paragraph description of the study. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source text.",NA,NA,NA,character
+b keywords,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+b keywords,key_words,2,FALSE,"If this is data the CCRCN curates, the submitter should include five to fifteen descriptive words or phrases describing the study. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source. Keywords help build some search functionality into the databases.",NA,NA,NA,character
+c authors,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year separated by underscores.",NA,NA,NA,character
+c authors,last_name,2,TRUE,Submitter's family name.,NA,NA,NA,character
+c authors,given_name,3,TRUE,"Submitter's first name, middle name, middle initial, or any other names. ",NA,NA,NA,character
+c authors,institution,4,TRUE,Submitter's current institution.,NA,NA,NA,character
+c authors,email,5,TRUE,Submitter's current email address.,NA,NA,NA,character
+c authors,address,6,FALSE,Submitter's current mailing address.,NA,NA,NA,character
+c authors,phone,7,FALSE,Submitter's current phone number.,NA,NA,NA,character
+c authors,corresponding_author,8,TRUE,TRUE or FALSE indicating whether the author should be contacted as the corresponding author.,NA,NA,NA,factor
+d funding source,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+d funding source,funding_agency,2,FALSE,"Agency name funding the research, spelled out, no acronyms.",NA,NA,NA,character
+d funding source,funding_id,3,FALSE,Code used by the agency to track the project funding.,NA,NA,NA,character
+d funding source,funding_notes,4,FALSE,Any other submitter-generated notes about the project funding.,NA,NA,NA,character
+e related publications,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+e related publications,bibtex_citation,2,FALSE,Submitters can associate multiple bibtex style citations with the dataset. They can also include the same information by filling out following attributes in tabular form if more convenient than Bibtex formatting.,NA,NA,NA,character
+e related publications,publication_type,3,FALSE,Code indicating the type of publication the study originates from.,NA,NA,NA,factor
+e related publications,author,4,FALSE,"The names of the author separated by ""and"".",NA,NA,NA,character
+e related publications,year,5,FALSE,"The year of publication or, if unpublished, the year of creation.",YYYY,NA,NA,Date
+e related publications,title,6,FALSE,The title of the work.,NA,NA,NA,character
+e related publications,journal,7,FALSE,The journal or magazine the work was published in.,NA,NA,NA,character
+e related publications,volume,8,FALSE,The volume of a journal or multi-volume book.,NA,NA,NA,character
+e related publications,number,9,FALSE,"The ""(issue) number"" of a journal, magazine, or tech-report, if applicable. (Most publications have a ""volume"", but no ""number"" field.).",NA,NA,NA,character
+e related publications,pages,10,FALSE,"Page numbers, separated either by commas or double-hyphens.",NA,NA,NA,character
+e related publications,url,11,FALSE,Permanent web address where the work can be located.,NA,NA,NA,character
+e related publications,doi,12,FALSE,Digital object identifier associated with the work.,NA,NA,NA,character
+e related publications,address,13,FALSE,"Publisher's address (usually just the city, but can be the full address for lesser-known publishers).",NA,NA,NA,character
+e related publications,annote,14,FALSE,An annotation for annotated bibliography styles (not typical).,NA,NA,NA,character
+e related publications,booktitle,15,FALSE,"The title of the book, if only part of it is being cited.",NA,NA,NA,character
+e related publications,chapter,16,FALSE,The chapter number.,NA,NA,NA,character
+e related publications,crossref,17,FALSE,The key of the cross-referenced entry.,NA,NA,NA,character
+e related publications,edition,18,FALSE,"The edition of a book, long form (such as ""First"" or ""Second"").",NA,NA,NA,character
+e related publications,editor,19,FALSE,The name(s) of the editor(s).,NA,NA,NA,character
+e related publications,howpublished,20,FALSE,"How it was published, if the publishing method is nonstandard.",NA,NA,NA,character
+e related publications,institution,21,FALSE,"The institution that was involved in the publishing, but not necessarily the publisher.",NA,NA,NA,character
+e related publications,key,22,FALSE,"A hidden field used for specifying or overriding the alphabetical order of entries (when the ""author"" and ""editor"" fields are missing). Note that this is very different from the key (mentioned just after this list) that is used to cite or cross-reference the entry.",NA,NA,NA,character
+e related publications,month,23,FALSE,"The month of publication (or, if unpublished, the month of creation).",MM,NA,NA,Date
+e related publications,note,24,FALSE,Miscellaneous extra information.,NA,NA,NA,character
+e related publications,organization,25,FALSE,The conference sponsor.,NA,NA,NA,character
+e related publications,publisher,26,FALSE,The publisher's name.,NA,NA,NA,character
+e related publications,school,27,FALSE,The school where the thesis was written.,NA,NA,NA,character
+e related publications,series,28,FALSE,"The series of books the book was published in (e.g. ""The Hardy Boys"" or ""Lecture Notes in Computer Science"").",NA,NA,NA,character
+e related publications,type,29,FALSE,"The field overriding the default type of publication (e.g. ""Research Note"" for techreport, ""{PhD} dissertation"" for phdthesis, ""Section"" for inbook/incollection).",NA,NA,NA,character
+f materials and methods,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+f materials and methods,coring_method,3,FALSE,Code indicating what type of device was used to collect soil depth profiles.,NA,NA,NA,factor
+f materials and methods,roots_flag,4,FALSE,Code indicating whether live roots were included or excluded from carbon assesments.,NA,NA,NA,factor
+f materials and methods,sediment_sieved_flag,5,FALSE,Code indicating whether or not sediment was sieved prior to carbon measurements.,NA,NA,NA,factor
+f materials and methods,sediment_sieve_size,6,FALSE,"If sediment was sieved, the size of sieve used.",NA,millimeters,real,numeric
+f materials and methods,compaction_flag,7,FALSE,Code indicating how the authors qualified or quantified compaction of the core.,NA,NA,NA,factor
+f materials and methods,dry_bulk_density_temperature,8,FALSE,Temperature at which samples were dried to measure dry bulk density. This can include either samples that were freeze dried or oven dried.,NA,celsius,real,numeric
+f materials and methods,dry_bulk_density_time,9,FALSE,Time over which samples were dried to measure dry bulk density.,NA,hour,real,numeric
+f materials and methods,dry_bulk_density_sample_volume,10,FALSE,"Sample volume used for bulk density measurements, if held constant.",,cubicCentimeters,real,numeric
+f materials and methods,dry_bulk_density_sample_mass,11,FALSE,"Sample mass used for bulk density measurements, if held constant.",NA,grams,real,numeric
+f materials and methods,dry_bulk_density_flag,12,FALSE,Any notable codes regarding how the authors quantified dry bulk density.,NA,NA,NA,factor
+f materials and methods,loss_on_ignition_temperature,13,FALSE,Temperature at which samples were combusted to estimate fraction organic matter.,NA,celsius,real,numeric
+f materials and methods,loss_on_ignition_time,14,FALSE,Time over which samples were combusted to estimate fraction organic matter.,NA,hour,real,numeric
+f materials and methods,loss_on_ignition_sample_volume,15,FALSE,"Sample volume used for loss on ignition, if held constant.",NA,cubicCentimeters,real,numeric
+f materials and methods,loss_on_ignition_sample_mass,16,FALSE,"Sample mass used for loss on ignition, if held constant.",,grams,real,numeric
+f materials and methods,loss_on_ignition_flag,17,FALSE,Common codes regarding loss on ignition methodology.,NA,NA,NA,factor
+f materials and methods,carbon_measured_or_modeled,18,FALSE,Code indicating whether fraction carbon was measured or estimated as a function of organic matter.,NA,NA,NA,factor
+f materials and methods,carbonates_removed,19,FALSE,Whether or not carbonates were removed prior to calculating fraction organic carbon.,NA,NA,NA,factor
+f materials and methods,carbonate_removal_method,20,FALSE,The method used to remove carbonates prior to measuring fraction carbon.,NA,NA,NA,factor
+f materials and methods,fraction_carbon_method,21,FALSE,"Code indicating the method for which fraction carbon was measured or modeled (Note: regression based models are permitted, but the use of the Bemmelen factor [0.58 gOC gOM<sup>-1</sup>] is discouraged).",NA,NA,NA,factor
+f materials and methods,fraction_carbon_type,22,FALSE,Code indicating whether fraction_carbon refers to organic or total carbon.,NA,NA,NA,factor
+f materials and methods,carbon_profile_notes,23,FALSE,"Any other submitter defined notes describing methodologies for determining dry bulk density, organic matter fraction, and carbon fraction.",NA,NA,NA,character
+f materials and methods,cs137_counting_method,24,FALSE,Code indicating the method used for determining radiocesium activity.,NA,NA,NA,factor
+f materials and methods,pb210_counting_method,25,FALSE,Code indicating the method used for determining lead 210 activity.,NA,NA,NA,factor
+f materials and methods,excess_pb210_rate,26,FALSE,Code indicating the mass or accretion rate used in the excess_pb_210_model,NA,NA,NA,factor
+f materials and methods,excess_pb210_model,27,FALSE,Code indicating the model used to estimate excess lead 210.,NA,NA,NA,factor
+f materials and methods,ra226_assumption,28,FALSE,Code indicating the assumption used to estimate the core's background <sup>226</sup>Ra levels.,NA,NA,NA,factor
+f materials and methods,c14_counting_method,29,FALSE,Code indicating the method used for determining radiocarbon activity.,NA,NA,NA,factor
+f materials and methods,dating_notes,30,FALSE,Any submitter defined notes elaborating on the process of dating the core not yet made clear by the coding.,NA,NA,NA,character
+f materials and methods,age_depth_model_reference,31,FALSE,Code indicating the reference or 0 year of the age depth model.,NA,NA,NA,factor
+f materials and methods,age_depth_model_notes,32,FALSE,Any submitter defined notes on how the age depth model was created.,NA,NA,NA,character
+g site information,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+g site information,site_id,2,FALSE,Site identification code unique to each study.,NA,NA,NA,character
+g site information,site_description,3,FALSE,Site description including relevant study details and political geographic units. Some of these descriptions can be automated by the ingestion code.,NA,NA,NA,character
+g site information,site_latitude_max,5,FALSE,Maximum latitude defining a bounding box for the site in decimal degree World Geodedic System of 1984 (WGS84). This can also be generated automatically by the ingestion code.,NA,degree,real,numeric
+g site information,site_latitude_min,6,FALSE,Minimum latitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.,NA,degree,real,numeric
+g site information,site_longitude_max,7,FALSE,Maximum longitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.,NA,degree,real,numeric
+g site information,site_longitude_min,8,FALSE,Minimum longitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.,NA,degree,real,numeric
+g site information,site_boundaries,9,FALSE,"As an alternative to submitting or automatically generating a bounding box, submitters can include a shapefile (.shp) or keyhole markup language (.kml) documenting the geographic boundaries of the site. This can be converted to and stored in well known text (WTK) format.",NA,NA,NA,character
+g site information,salinity_class,10,FALSE,"Code based on submitter field observation or measurement indicating average annual salinity (Note: Palustrine and freshwater should only include tidal wetlands, or wetlands that are potentially/formerly tidal but artificially freshened due to artificial tidal restrictions).",NA,NA,NA,factor
+g site information,salinity_method,11,FALSE,Indicate whether salinity_class was determined using a field observation or a measurement.,NA,NA,NA,factor
+g site information,salinity_notes,12,FALSE,Any relevant submitter generated notes on how salinity_class was determined.,NA,NA,NA,character
+g site information,vegetation_class,13,FALSE,Code based on submitter field observations or measurement indicating dominant wetland vegetation type.,NA,NA,NA,factor
+g site information,vegetation_method,14,FALSE,Indicate whether vegetation_class was determined using a field observation or a measurement,NA,NA,NA,factor
+g site information,vegetation_notes,15,FALSE,Any relevant submitter generated notes on how vegetation_class was were determined,NA,NA,NA,character
+g site information,inundation_class,16,FALSE,Code based on submitter field observation or measurement indicating how often the coring location is inundated,NA,NA,NA,factor
+g site information,inundation_method,17,FALSE,Indicate whether inundation_class was determined using a field observation or a measurement,NA,NA,NA,factor
+g site information,inundation_notes,18,FALSE,Any relevant submitter generated notes on how inundation was determined,NA,NA,NA,character
+h subsite information,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,factor
+h subsite information,site_id,2,FALSE,Site identification code unique to each study.,NA,NA,NA,factor
+h subsite information,core_id,3,TRUE,Core identification code unique to each site.,NA,NA,NA,factor
+h subsite information,core_date,4,FALSE,Date of core collection.,YYYY-MM-DD,NA,NA,Date
+h subsite information,core_notes,5,FALSE,Any other relevant submitter generated notes on how cores were collected.,NA,NA,NA,character
+h subsite information,core_latitude,6,FALSE,Positional latitude of the core in decimal degree WGS84.,NA,degree,real,numeric
+h subsite information,core_longitude,7,FALSE,Positional longitude of the core in decimal degree WGS84.,NA,degree,real,numeric
+h subsite information,core_position_accuracy,8,FALSE,"Accuracy of latitude and longitude measurement, if determined and recorded.",NA,meter,real,numeric
+h subsite information,core_position_method,9,FALSE,Code indicating how latitude and longitude were determined.,NA,NA,NA,factor
+h subsite information,core_position_notes,10,FALSE,Any relevant submitter generated notes on how latitude and longitude were determined.,NA,NA,NA,character
+h subsite information,core_elevation,11,FALSE,Surface elevation of the core relative to defined datum.,NA,meters,real,numeric
+h subsite information,core_elevation_datum,12,FALSE,The datum relative to which the core elevation was measured against (For a complete list of datum names and aliases please refer to the ISO Geodedic Registry https://iso.registry.bespire.eu/register/geodetic/VerticalDatum).,NA,NA,NA,factor
+h subsite information,core_elevation_accuracy,13,FALSE,"Accuracy of elevation measurement, if determined and recorded",NA,meters,real,numeric
+h subsite information,core_elevation_method,14,FALSE,Code indicating how elevation was determined,NA,NA,NA,factor
+h subsite information,core_elevation_notes,15,FALSE,Any relevant submitter generated notes on how elevation was determined,NA,NA,NA,character
+h subsite information,salinity_class,16,FALSE,"Code based on submitter field observation or measurement indicating average annual salinity (Note: Palustrine and freshwater should only include tidal wetlands, or wetlands that are potentially/formerly tidal but artificially freshened due to artificial tidal restrictions).",NA,NA,NA,factor
+h subsite information,salinity_method,17,FALSE,Indicate whether salinity_class was determined using a field observation or a measurement,NA,NA,NA,factor
+h subsite information,salinity_notes,18,FALSE,Any relevant submitter generated notes on how salinity_class was determined,NA,NA,NA,character
+h subsite information,vegetation_class,19,FALSE,Code based on submitter field observations or measurement indicating dominant wetland vegetation type.,NA,NA,NA,factor
+h subsite information,vegetation_method,20,FALSE,Indicate whether vegetation_class was determined using a field observation or a measurement,NA,NA,NA,factor
+h subsite information,vegetation_notes,21,FALSE,Any relevant submitter generated notes on how vegetation_class and dominant_species were determined.,NA,NA,NA,character
+h subsite information,inundation_class,22,FALSE,Code based on submitter field observation or measurement indicating how often the coring location is inundated.,NA,NA,NA,factor
+h subsite information,inundation_method,23,FALSE,Indicate whether inundation_class was determined using a field observation or a measurement,NA,NA,NA,factor
+h subsite information,inundation_notes,24,FALSE,Any relevant submitter generated notes on how elevation was determined,NA,NA,NA,character
+h subsite information,core_length_flag,25,FALSE,"Indicated whether or not the coring team believes they recovered a full sediment profile, down to bedrock, or other non-marsh interface.",NA,NA,NA,factor
+j depth series,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+j depth series,site_id,2,FALSE,Site identification code unique to each study,NA,NA,NA,character
+j depth series,core_id,3,TRUE,Core identification code unique to each site,NA,NA,NA,character
+j depth series,depth_min,4,TRUE,Minimum depth of a sampling increment.,NA,centimeter,NA,numeric
+j depth series,depth_max,5,TRUE,Maximum depth of a sampling increment.,NA,centimeter,NA,numeric
+j depth series,sample_id,6,FALSE,"Sample identification unique to the core. This should be used in the case that there are relevant lab specific sample codes, or in the case that there are multiple replicate samples.",NA,NA,NA,character
+j depth series,dry_bulk_density,7,TRUE,Dry mass per unit volume of a soil sample. This does not include ash free bulk density.,NA,gramsPerCubicCentimeter,real,numeric
+j depth series,fraction_organic_matter,8,FALSE,Mass of organic matter relative to sample dry mass.  Ash free bulk density should not be used here but should be expressed as a loss on ignition fraction .,NA,dimensionless,real,numeric
+j depth series,fraction_carbon,9,FALSE,Mass of carbon relative to sample dry mass.,NA,dimensionless,real,numeric
+j depth series,compaction_fraction,11,FALSE,Fraction of the sample depth interval reduced due to compaction.,NA,dimensionless,real,numeric
+j depth series,compaction_notes,12,FALSE,Any submitter generated notes on compaction.,NA,NA,NA,character
+j depth series,cs137_activity,13,FALSE,Radioactivity counts per unit dry weight for radiocesium (<sup>137</sup>Cs).,NA,becquerelPerKilogram,real,numeric
+j depth series,cs137_activity_sd,14,FALSE,1 standard deviation of uncertainty associated with cs137_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,total_pb210_activity,15,FALSE,Total radioactivity counts per unit dry weight for excess lead 210 (<sup>210</sup>Pb).,NA,becquerelPerKilogram,real,numeric
+j depth series,total_pb210_activity_sd,16,FALSE,1 standard deviation of uncertainty associated with total_pb210_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,ra226_activity,17,FALSE,Total radioactivity counts per unit dry weight for Radium 226 (<sup>226</sup>Ra) if measured as part of the <sup>210</sup>Pb dating process.,NA,becquerelPerKilogram,real,numeric
+j depth series,ra226_activity_sd,18,FALSE,1 standard deviation of uncertainty associated with ra226_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,excess_pb210_activity,19,FALSE,Excess radioactivity counts per unit dry weight for excess lead 210 (<sup>210</sup>Pb).,NA,becquerelPerKilogram,real,numeric
+j depth series,excess_pb210_activity_sd,20,FALSE,1 standard deviation of uncertainty associated with excess_pb210_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,c14_age,21,FALSE,Radiocarbon age as estimated from AMS measurements.,NA,radiocarbonYear,real,numeric
+j depth series,c14_age_sd,22,FALSE,Estimated uncertainty in c14_age.,NA,radiocarbonYear,real,numeric
+j depth series,c14_material,23,FALSE,Description of the material selected for radiocarbon (<sup>14</sup>C) dating.,NA,NA,NA,character
+j depth series,c14_notes,24,FALSE,Any relevant submitter generated notes on <sup>14</sup>C dating process.,NA,NA,NA,character
+j depth series,delta_c13,25,FALSE,The isotopic signature of <sup>13</sup>C. This is oftentimes measured along with c14_age and can be useful for analysing carbon lability and provenance.,NA,partsPerMillion,real,numeric
+j depth series,be7_activity,26,FALSE,Radioactivity counts per unit dry weight for <sup>7</sup>Be.,NA,becquerelPerKilogram,real,numeric
+j depth series,be7_activity_sd,27,FALSE,Estimated uncertainty in be_7_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,am241_activity,28,FALSE,Radioactivity counts per unit dry weight for <sup>241</sup>Am.,NA,becquerelPerKilogram,real,numeric
+j depth series,am241_activity_sd,29,FALSE,Estimated uncertainty in am_241_activity.,NA,becquerelPerKilogram,real,numeric
+j depth series,marker_date,30,FALSE,"The age of any other dated depth horizon such as an artificial marker, pollen horizon, pollution horizon, etc.",YYYY-MM-DD,NA,NA,Date
+j depth series,marker_type,31,FALSE,Code indicating the type of marker.,NA,NA,NA,factor
+j depth series,marker_notes,32,FALSE,Any other submitter generated notes about the origin of the marker.,NA,NA,NA,character
+j depth series,age,33,FALSE,"Most likely, median, or mean age of the depth interval from submitter generated age depth model.",NA,year,real,numeric
+j depth series,age_min,34,FALSE,Minimum age of the depth interval from submitter generated age depth model.,NA,year,real,numeric
+j depth series,age_max,35,FALSE,Maximum age of the depth interval from submitter generated age depth model.,NA,year,real,numeric
+j depth series,depth_interval_notes,36,FALSE,Any other submitter generated notes specific to the depth interval.,NA,NA,NA,character
+k species present at site or subsite,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+k species present at site or subsite,site_id,2,FALSE,Site identification code unique to each study.,NA,NA,NA,character
+k species present at site or subsite,core_id,3,FALSE,Core identification code unique to each site.,NA,NA,NA,character
+k species present at site or subsite,species_code,4,FALSE,Code associated with a species or a vegetation assemblage.,NA,NA,NA,character
+l impact at site or subsite,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+l impact at site or subsite,site_id,2,FALSE,Site identification code unique to each study.,NA,NA,NA,character
+l impact at site or subsite,core_id,3,FALSE,Core identification code unique to each site.,NA,NA,NA,character
+l impact at site or subsite,impact_class,4,FALSE,Code indicating any major anthropogenic impacts historically and currently affecting the coring location.,NA,NA,NA,factor
+m species table,study_id,1,TRUE,"Unique identifier for the study made up of the first author's family name, as well as the second author's family name or 'et al.' if more than three, then publication year spearated by underscores.",NA,NA,NA,character
+m species table,species_code,2,FALSE,Code associated with a species or a vegetation assembelage.,NA,NA,NA,character
+m species table,genus,3,FALSE,Genus according to the most up to date classification.,NA,NA,NA,character
+m species table,species,4,FALSE,Species according to the most up to date classification.,NA,NA,NA,character
+m species table,sub_species,5,FALSE,Any nomenclature referring to subspecies special cases.,NA,NA,NA,character
+m species table,hybrid,6,FALSE,Any nomenclature referring to special cases of hybridization.,NA,NA,NA,character
+m species table,common_name,7,FALSE,"Common name associated with the species, especially if it is referred to in any accompanying text.",NA,NA,NA,character
+m species table,species_notes,8,FALSE,Any other submitter defined notes regarding the species.,NA,NA,NA,character

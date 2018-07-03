@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Database Structure</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Coastal Carbon Research Coordination Network</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Governance Principles</a>
+</li>
+<li>
+  <a href="data_management.html">Data Management Plan</a>
+</li>
+<li>
+  <a href="Controlled_Attributes_and_Variables.html">Database Structure and Vocabulary</a>
+</li>
+<li>
+  <a href="contact.html">Join the Network</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Database Structure</h1>
+<h3 class="subtitle"><em>Naming Conventions for Attributes and Variables (Version 1)</em></h3>
+<h4 class="date"><em>3 July 2018</em></h4>
+
+</div>
+
+
+<script>
+   $(document).ready(function() {
+     $head = $('#header');
+     $head.prepend('<img src=\"https://smithsonian.github.io/CCRCN-Public-Comment/images/CoastalCarobonRCNLogo-OnlyLogo.png" style=\"float: right;width: 150px;\"/>')
+   });
+</script>
+<div id="contents" class="section level2">
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a>
+<ul>
+<li><a href="#development-process-to-date">Development Process to Date</a></li>
+<li><a href="#ongoing-and-future-development">Ongoing and Future Development</a></li>
+</ul></li>
+<li><a href="#study-level-metadata">Study Level Metadata</a>
+<ul>
+<li><a href="#study-information">Study Information</a></li>
+<li><a href="#keywords">Keywords</a></li>
+<li><a href="#authors">Authors</a></li>
+<li><a href="#funding-sources">Funding Sources</a></li>
+<li><a href="#associated-publications">Associated Publications</a></li>
+</ul></li>
+<li><a href="#materials-and-methods">Materials and Methods</a></li>
+<li><a href="#site-level">Site Level</a></li>
+<li><a href="#core-level">Core Level</a></li>
+<li><a href="#soil-depth-series">Soil Depth Series</a></li>
+<li><a href="#mulitple-special-conditions-at-the-level-of-the-site-or-core">Mulitple Special Conditions at the Level of the Site or Core</a>
+<ul>
+<li><a href="#dominant-species-present">Dominant Species Present</a></li>
+<li><a href="#anthropogenic-impacts-present">Anthropogenic Impacts Present</a></li>
+</ul></li>
+<li><a href="#submitter-defined-attributes-and-definitions">Submitter Defined Attributes and Definitions</a>
+<ul>
+<li><a href="#study-level-species-table">Study Level Species Table</a></li>
+<li><a href="#other-attributes-and-variables">Other Attributes and Variables</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>This page serves as guidance for the types and scope of data and metadata that will be archived as part of the Network’s developing tidal soil carbon synthesis. We propose the following data structure and standardized attribute names for metadata and data in order to make datasets machineireadable and interoperable. Each subheading lists a level of metadata or data hierarchy from <em>study level</em> metadata to <em>site level</em> to <em>core level</em> to <em>depth series</em> information. Each subheading also represents separate tables which can be joined by common attributes such as study_id, site_id, and core_id. We also include accompanying sets of recommended controlled vocabulary for key categorical variables (also known as factors). Some attributes have controlled units that we wish to keep uniform across datasets. Data that we curate will follow naming conventions outlined herein. Data that we ingest from outside sources will be converted to these conventions when being ingested into the central GitHub database using custom-built R scripts.</p>
+<p>At a minimum a submission should have the following for inclusion in soil carbon synthesis products: <em>study_id</em>, author information, <em>core_id</em>, latitude and longitude information associated with either a core or the site, <em>depth_min</em>, <em>depth_max</em>, <em>dry_bulk_density</em>, <em>organic_matter_fraction</em> and/or <em>carbon_fraction</em>. The more auxillary detail that you provide, the more widely your data can be used. Throughout the tables below <strong>mandatory attributes</strong> are shown in <strong>bold</strong>.</p>
+<p>The <em>depth series</em> is the level at which carbon-relevant information is housed. This synthesis will not ingest core-level or site-level averages of variables like dry bulk density, fraction organic matter, or fraction carbon. These averages can be derived from the database, but are not immediately useful to our research questions unless those averages can be traced back to their original data.</p>
+<p>There are many opportunities to express your data’s individuality. We refer throughout to ‘flags’ and ‘notes’. Flags refer to common methodological choices or data issues that can be coded using categorical variables. The idea behind flags is to allow users the option to query datasets based on methodology. Flags are very machine-readable but not very flexible from the standoint of a submitter. Notes are available for almost all measured attributes and take the form of free-text allowing submitters to provide context, obeservations, or concerns about methods, sites, cores, or observations. These are more flexible from the perspective of a submitter but are less machine-readable.</p>
+<div id="development-process-to-date" class="section level3">
+<h3>Development Process to Date</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>This guidance is the culminations of three efforts:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.carboncyclescience.us/news/global-science-and-data-network-coastal-blue-carbon-workshop-completed" target="_blank">A meeting of 47 experts in Menlo Park, CA in January 2016</a>, hosted by the United States Carbon Cycle Science Program, in order to establish community priorities.</li>
+<li>Experience with the initial curation of a dataset of <a href="https://doi.org/10.25572/ccrcn/10088/35684">~1,500 public soil cores</a> as part of the publication <a href="https://www.nature.com/articles/s41598-018-26948-7" target="_blank">Holmquist et al., 2018 Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States.</a></li>
+<li>The results of 19 collaborators submitting commentary on an <a href="https://smithsonian.github.io/CCRCN-Public-Comment/index.html" target="_blank">initial draft of these recommendations</a> put up for public comment in April and May 2018.</li>
+</ol>
+</div>
+<div id="ongoing-and-future-development" class="section level3">
+<h3>Ongoing and Future Development</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>We aknowledge that this is a lot of information to process and do not want to imply &gt;100 attributes are mandatory. They are not. While we will make the entire entry template available for download (LINK PENDING), we are also in the process of designing an application which will generate a custom submission template based on your answers to a questionnaire about your dataset.</p>
+<p>Submitters can feel free to add other attributes to data submissions as long as the attributes and any associated categorical variables are defined with the submission. CCRCN personnel will accept and archive related soils data within reason, but will not be able to quality control data falling outside the outlined guidance. If attributes or variablesare submitted often and there is community coordination behind their inclusion, they could be integrated into periodic updates to this guidance.</p>
+<p>We anticipate that this guidance will evolve as we synthesize new datasets as part of five working groups. Part of each working group’s task will be to revisit this guidance and agree on new needed attribute names, definitions, variables, controlled vocabulary and units. Any further guidance based on the working group’s experience will be made available to the community via post-workshop reports and peer reviewed publications. Documentation on any changes to the data management plan and submission templates will be issued with version numbers. CCRCN producs will reference these documents and version numbers. We will avoid changing attribute or variable names, and will only do so if there is a compelling reason to. If in the future there ends up being more than one acceptable redundant attribute or variable name, names will be added to a database of synonyms and working synthesis products will be updated given the most current standards.</p>
+</div>
+</div>
+<div id="study-level-metadata" class="section level2">
+<h2>Study Level Metadata</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>Study-level information is essential for formatting the Ecological Metadata Language, and is a great way for you to express your project’s history, context, and originality.</p>
+<div id="study-information" class="section level3">
+<h3>Study Information</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>Please provide some custom text for your study.</p>
+<table>
+<caption>Study Information</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">one_liner</td>
+<td align="left">If this is data the CCRCN curates, the submitter should include a one line description of the study.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">study_code</td>
+<td align="left">If this is data the CCRCN curates, the study will be assigned a 128-bit universal unique identifier. Submitters should only include this if it already exists for the data. Otherwise CCRCN personnel will generate this as part of the data ingestion process.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">study_start_date</td>
+<td align="left">Study start date.</td>
+<td align="left">Date</td>
+<td align="left">YYYY-MM-DD</td>
+</tr>
+<tr class="odd">
+<td align="left">study_end_date</td>
+<td align="left">Study end date.</td>
+<td align="left">Date</td>
+<td align="left">YYYY-MM-DD</td>
+</tr>
+<tr class="even">
+<td align="left">title</td>
+<td align="left">If this is data the CCRCN curates, the submitter should include a study title. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source text.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">abstract</td>
+<td align="left">If this is data the CCRCN curates, the submitter should include a one paragraph description of the study. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source text.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="keywords" class="section level3">
+<h3>Keywords</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>Keywords are not necessary, but can help make your data more searchable in a database.</p>
+<table>
+<caption>Keywords</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">key_words</td>
+<td align="left">If this is data the CCRCN curates, the submitter should include five to fifteen descriptive words or phrases describing the study. If this is data the CCRCN is ingesting, this can be pulled from the metadata or source. Keywords help build some search functionality into the databases.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="authors" class="section level3">
+<h3>Authors</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>For each dataset at least one corresponding author should be specified. Specifying author names will allow users (or you in the future) to query the dataset and see how many cores you’ve submitted.</p>
+<table>
+<caption>Authors</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year separated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><b>last_name</b></td>
+<td align="left">Submitter’s family name.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><b>given_name</b></td>
+<td align="left">Submitter’s first name, middle name, middle initial, or any other names.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><b>institution</b></td>
+<td align="left">Submitter’s current institution.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><b>email</b></td>
+<td align="left">Submitter’s current email address.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">address</td>
+<td align="left">Submitter’s current mailing address.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">phone</td>
+<td align="left">Submitter’s current phone number.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><b>corresponding_author</b></td>
+<td align="left">TRUE or FALSE indicating whether the author should be contacted as the corresponding author.</td>
+<td align="left">factor</td>
+<td align="left">TRUE = The author should be contacted with any further questions. FALSE = The author should not be contacted with any further questions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="funding-sources" class="section level3">
+<h3>Funding Sources</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>Your funders will love being acknowledged in a data realase, and will appreciate being searchable in the database. One dataset can have multiple funding sources.</p>
+<table>
+<caption>Funding</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">funding_agency</td>
+<td align="left">Agency name funding the research, spelled out, no acronyms.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">funding_id</td>
+<td align="left">Code used by the agency to track the project funding.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">funding_notes</td>
+<td align="left">Any other submitter-generated notes about the project funding.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="associated-publications" class="section level3">
+<h3>Associated Publications</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>One dataset can be affiliated with multiple publications. This allows an original work to be cited as a primary source, as well as any secondary or synthesis papers that added value to the dataset’s archival. Submitters can simply add a bibtex style citation, such as one copied over from Google Scholar, or they can fill out all of the relevant attributes for the data release. It’s all the same to us. Much of this guidence came from the <a href="https://en.wikipedia.org/wiki/BibTeX" target="_blank">Wikipedia page for BibTeX</a>.</p>
+<table>
+<caption>Associated Publications</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">bibtex_citation</td>
+<td align="left">Submitters can associate multiple bibtex style citations with the dataset. They can also include the same information by filling out following attributes in tabular form if more convenient than Bibtex formatting.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">publication_type</td>
+<td align="left">Code indicating the type of publication the study originates from.</td>
+<td align="left">factor</td>
+<td align="left">article = Journal article. book = Book. mastersthesis = Master’s Thesis. misc = Miscellaneous publications such as online datasets. phdthesis = PhD thesis or dissertation. techreport = Technical report. unpublished = Unpublished source.</td>
+</tr>
+<tr class="even">
+<td align="left">author</td>
+<td align="left">The names of the author separated by “and”.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">year</td>
+<td align="left">The year of publication or, if unpublished, the year of creation.</td>
+<td align="left">Date</td>
+<td align="left">YYYY</td>
+</tr>
+<tr class="even">
+<td align="left">title</td>
+<td align="left">The title of the work.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">journal</td>
+<td align="left">The journal or magazine the work was published in.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">volume</td>
+<td align="left">The volume of a journal or multi-volume book.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">number</td>
+<td align="left">The “(issue) number” of a journal, magazine, or tech-report, if applicable. (Most publications have a “volume”, but no “number” field.).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">pages</td>
+<td align="left">Page numbers, separated either by commas or double-hyphens.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">url</td>
+<td align="left">Permanent web address where the work can be located.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">doi</td>
+<td align="left">Digital object identifier associated with the work.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">address</td>
+<td align="left">Publisher’s address (usually just the city, but can be the full address for lesser-known publishers).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">annote</td>
+<td align="left">An annotation for annotated bibliography styles (not typical).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">booktitle</td>
+<td align="left">The title of the book, if only part of it is being cited.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">chapter</td>
+<td align="left">The chapter number.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">crossref</td>
+<td align="left">The key of the cross-referenced entry.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">edition</td>
+<td align="left">The edition of a book, long form (such as “First” or “Second”).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">editor</td>
+<td align="left">The name(s) of the editor(s).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">howpublished</td>
+<td align="left">How it was published, if the publishing method is nonstandard.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">institution</td>
+<td align="left">The institution that was involved in the publishing, but not necessarily the publisher.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">key</td>
+<td align="left">A hidden field used for specifying or overriding the alphabetical order of entries (when the “author” and “editor” fields are missing). Note that this is very different from the key (mentioned just after this list) that is used to cite or cross-reference the entry.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">month</td>
+<td align="left">The month of publication (or, if unpublished, the month of creation).</td>
+<td align="left">Date</td>
+<td align="left">MM</td>
+</tr>
+<tr class="even">
+<td align="left">note</td>
+<td align="left">Miscellaneous extra information.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">organization</td>
+<td align="left">The conference sponsor.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">publisher</td>
+<td align="left">The publisher’s name.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">school</td>
+<td align="left">The school where the thesis was written.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">series</td>
+<td align="left">The series of books the book was published in (e.g. “The Hardy Boys” or “Lecture Notes in Computer Science”).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">type</td>
+<td align="left">The field overriding the default type of publication (e.g. “Research Note” for techreport, “{PhD} dissertation” for phdthesis, “Section” for inbook/incollection).</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="materials-and-methods" class="section level2">
+<h2>Materials and Methods</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>For each study please fill out key data regarding materials and methods that are important to the soil carbon stocks meta-analysis. Some users may want to include or exclude certain methodologies, or see your commentary on the methods. Let’s make it easy for them.</p>
+<table>
+<caption>Materials and Methods</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">coring_method</td>
+<td align="left">Code indicating what type of device was used to collect soil depth profiles.</td>
+<td align="left">factor</td>
+<td align="left">gouge auger = A half cylinder coring device in which the coring section is open, not sealed off by a fin. hargas corer = A large diameter (&gt;10 cm) coring device consisting of a tube, piston, and a cutting head. mcauley corer = A half cylinder coring device with the coring section sealed off by a fin attached to a rotating pivot point. mccaffrey peat cutter = U-shaped blade that extracts a core by cutting down through peat. none specified = No coring device was specified. other shallow corer = Any other type of coring device typically taking cores shallower than 30 centimeters. piston corer = A device that extrudes core into tube upward with a plunger. push core = Any number of coring types involving driving a tube into the sediment to recover a core. pvc and hammer = PVC pipe was driven into the sediment with a hammer to recover a core. russian corer = A half cylinder coring device with the coring section sealed off by a fin attached to a rotating pivot point. vibracore = A technique involving collecting a core by sinking a continuous pipe into sediment attaching a source of vibration, then recovering using a winch and pulley. surface sample = A technique involving collecting a core shallower than ~5 cm using a circular metal cutter.</td>
+</tr>
+<tr class="odd">
+<td align="left">roots_flag</td>
+<td align="left">Code indicating whether live roots were included or excluded from carbon assesments.</td>
+<td align="left">factor</td>
+<td align="left">roots and rhizomes included = Roots and rhizomes were included in dry bulk density and or organic matter and carbon measurements. roots and rhizones separated = Roots and rhizomes were separated from soil before dry bulk density and or organic matter and carbon measurements.</td>
+</tr>
+<tr class="even">
+<td align="left">sediment_sieved_flag</td>
+<td align="left">Code indicating whether or not sediment was sieved prior to carbon measurements.</td>
+<td align="left">factor</td>
+<td align="left">sediment sieved = Sediment was sieved prior to analysis for organics. sediment not sieved = Sediment was not sieved prior to analysis for organics.</td>
+</tr>
+<tr class="odd">
+<td align="left">sediment_sieve_size</td>
+<td align="left">If sediment was sieved, the size of sieve used.</td>
+<td align="left">numeric</td>
+<td align="left">millimeters</td>
+</tr>
+<tr class="even">
+<td align="left">compaction_flag</td>
+<td align="left">Code indicating how the authors qualified or quantified compaction of the core.</td>
+<td align="left">factor</td>
+<td align="left">compaction qualified = Compaction was at least qualified and noted by the authors. compaction quantified = Compaction was quantified and corrected for in core based measurements. corer limits compaction = Authors specified that the coring device’s design minimized compaction. no obvious compaction = Authors observed no obvious compaction. not specified = Compaction was not specified.</td>
+</tr>
+<tr class="odd">
+<td align="left">dry_bulk_density_temperature</td>
+<td align="left">Temperature at which samples were dried to measure dry bulk density. This can include either samples that were freeze dried or oven dried.</td>
+<td align="left">numeric</td>
+<td align="left">celsius</td>
+</tr>
+<tr class="even">
+<td align="left">dry_bulk_density_time</td>
+<td align="left">Time over which samples were dried to measure dry bulk density.</td>
+<td align="left">numeric</td>
+<td align="left">hour</td>
+</tr>
+<tr class="odd">
+<td align="left">dry_bulk_density_sample_volume</td>
+<td align="left">Sample volume used for bulk density measurements, if held constant.</td>
+<td align="left">numeric</td>
+<td align="left">cubicCentimeters</td>
+</tr>
+<tr class="even">
+<td align="left">dry_bulk_density_sample_mass</td>
+<td align="left">Sample mass used for bulk density measurements, if held constant.</td>
+<td align="left">numeric</td>
+<td align="left">grams</td>
+</tr>
+<tr class="odd">
+<td align="left">dry_bulk_density_flag</td>
+<td align="left">Any notable codes regarding how the authors quantified dry bulk density.</td>
+<td align="left">factor</td>
+<td align="left">air dried to constant mass = Methodology specified that samples were air dried to a constant mass. modeled = Bulk density was not measured, but was modeled from loss on ignition and assumptions about the particle densities of organic and inorganic matter. freeze dried = Bulk density was measured on freeze dried samples. no details = No additional details regarding bulk density methodology were provided. removed non structural water = Bulk density methodology did not specify drying temperature or length, only that non-strucural water was removed. time approximate = Bulk density time recorded herin is an approximate estimate. time not specified = Bulk density time was not specified. to constant mass = Bulk density methodology did not specify drying temperature or length, only that samples were dried to a constant mass.</td>
+</tr>
+<tr class="even">
+<td align="left">loss_on_ignition_temperature</td>
+<td align="left">Temperature at which samples were combusted to estimate fraction organic matter.</td>
+<td align="left">numeric</td>
+<td align="left">celsius</td>
+</tr>
+<tr class="odd">
+<td align="left">loss_on_ignition_time</td>
+<td align="left">Time over which samples were combusted to estimate fraction organic matter.</td>
+<td align="left">numeric</td>
+<td align="left">hour</td>
+</tr>
+<tr class="even">
+<td align="left">loss_on_ignition_sample_volume</td>
+<td align="left">Sample volume used for loss on ignition, if held constant.</td>
+<td align="left">numeric</td>
+<td align="left">cubicCentimeters</td>
+</tr>
+<tr class="odd">
+<td align="left">loss_on_ignition_sample_mass</td>
+<td align="left">Sample mass used for loss on ignition, if held constant.</td>
+<td align="left">numeric</td>
+<td align="left">grams</td>
+</tr>
+<tr class="even">
+<td align="left">loss_on_ignition_flag</td>
+<td align="left">Common codes regarding loss on ignition methodology.</td>
+<td align="left">factor</td>
+<td align="left">no details = No additional details regarding loss on ignition methodology were provided. time approximate = Loss on ignition time recorded herin is an approximate estimate. time not specified = No additional details regarding loss on ignition duration were provided.</td>
+</tr>
+<tr class="odd">
+<td align="left">carbon_measured_or_modeled</td>
+<td align="left">Code indicating whether fraction carbon was measured or estimated as a function of organic matter.</td>
+<td align="left">factor</td>
+<td align="left">measured = Fraction carbon was measured as opposed to modeled. modeled = Fraction carbon was modeled as opposed to measured.</td>
+</tr>
+<tr class="even">
+<td align="left">carbonates_removed</td>
+<td align="left">Whether or not carbonates were removed prior to calculating fraction organic carbon.</td>
+<td align="left">factor</td>
+<td align="left">FALSE = Carbonates were not removed before measuring organic carbon. TRUE = Carbonates were removed before measuring organic carbon.</td>
+</tr>
+<tr class="odd">
+<td align="left">carbonate_removal_method</td>
+<td align="left">The method used to remove carbonates prior to measuring fraction carbon.</td>
+<td align="left">factor</td>
+<td align="left">direct acid treatment = Carbonates were removed using direct application of dilute acid. acid fumigation = Carbonates were removed by fumigating with concentrated acid. low carbonate soil = Organic carbon fraction was measured without removing carbonates assuming carbonate content of the soil type was minimal. carbonates not removed = Carbonates were not removed and low carbonate soil was not specified. none specified = Carbonate removal methodology was not specified.</td>
+</tr>
+<tr class="even">
+<td align="left">fraction_carbon_method</td>
+<td align="left">Code indicating the method for which fraction carbon was measured or modeled (Note: regression based models are permitted, but the use of the Bemmelen factor [0.58 gOC gOM<sup>-1</sup>] is discouraged).</td>
+<td align="left">factor</td>
+<td align="left">local regression = A regression model fit using a subset of measurements was used to predict fraction carbon as a function of fraction organic matter. Craft regression = Used regression model from Craft et al., 1991, Estuaries, to predict fraction carbon as a function of fraction organic matter. Holmquist regression = Used regression model from Holmquist et al., 2018, Scientific Reports, to predict fraction carbon as a function of fraction organic matter. EA = Each sample presented was measured using Elemental Analysis. Fourqurean regression = Used regression model from Fourqurean et al., 2012, Nature Geoscience, to predict fraction carbon as a function of fraction organic matter. wet oxidation = Each sample was measured using a wet oxidation method. kjeldahl digestion = Each sample was measured kjeldahl digestion method. no details = No additional details were provided regarding fraction carbon methodologies.</td>
+</tr>
+<tr class="odd">
+<td align="left">fraction_carbon_type</td>
+<td align="left">Code indicating whether fraction_carbon refers to organic or total carbon.</td>
+<td align="left">factor</td>
+<td align="left">organic carbon = Author specified that fraction carbon measurements were of organic carbon. total carbon = Author specified that fraction carbon measurements were of total carbon.</td>
+</tr>
+<tr class="even">
+<td align="left">carbon_profile_notes</td>
+<td align="left">Any other submitter defined notes describing methodologies for determining dry bulk density, organic matter fraction, and carbon fraction.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">cs137_counting_method</td>
+<td align="left">Code indicating the method used for determining radiocesium activity.</td>
+<td align="left">factor</td>
+<td align="left">alpha = Alpha counting method used. gamma = Gamma counting method used.</td>
+</tr>
+<tr class="even">
+<td align="left">pb210_counting_method</td>
+<td align="left">Code indicating the method used for determining lead 210 activity.</td>
+<td align="left">factor</td>
+<td align="left">alpha = Alpha counting method used. gamma = Gamma counting method used.</td>
+</tr>
+<tr class="odd">
+<td align="left">excess_pb210_rate</td>
+<td align="left">Code indicating the mass or accretion rate used in the excess_pb_210_model</td>
+<td align="left">factor</td>
+<td align="left">mass accumulation = Excess <sup>210</sup>Pb modeled using mass accumulation rate. accretion = Excess <sup>210</sup>Pb modeled using vertical accretion rate.</td>
+</tr>
+<tr class="even">
+<td align="left">excess_pb210_model</td>
+<td align="left">Code indicating the model used to estimate excess lead 210.</td>
+<td align="left">factor</td>
+<td align="left">CRS = Constant rate of supply model used. CIC = Constant initial concentration model used. CFCS = Constant flux constant sedimentation model used.</td>
+</tr>
+<tr class="odd">
+<td align="left">ra226_assumption</td>
+<td align="left">Code indicating the assumption used to estimate the core’s background <sup>226</sup>Ra levels.</td>
+<td align="left">factor</td>
+<td align="left">each sample = <sup>226</sup>Ra was measured for each sample. total core = <sup>226</sup>Ra was measured for the total core, at asymptote = asy</td>
+</tr>
+<tr class="even">
+<td align="left">c14_counting_method</td>
+<td align="left">Code indicating the method used for determining radiocarbon activity.</td>
+<td align="left">factor</td>
+<td align="left">AMS = Accelerator mass spectroscopy used. beta = Beta counting used.</td>
+</tr>
+<tr class="odd">
+<td align="left">dating_notes</td>
+<td align="left">Any submitter defined notes elaborating on the process of dating the core not yet made clear by the coding.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">age_depth_model_reference</td>
+<td align="left">Code indicating the reference or 0 year of the age depth model.</td>
+<td align="left">factor</td>
+<td align="left">YBP = Year zero is defined as years before present, 1960 CE. CE = Year zero is set according to Common Era and Before Common Era standards. core collection date = Year zero is set as the core’s collection year.</td>
+</tr>
+<tr class="odd">
+<td align="left">age_depth_model_notes</td>
+<td align="left">Any submitter defined notes on how the age depth model was created.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="site-level" class="section level2">
+<h2>Site Level</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>Site information is not required, but could provide important context for your study. You should describe the site and how it fits into your broader study, provide geographic information (although this can be generated automatically from the cores as well), and add any relevant tags and notes regarding site vegetation and inundation. Vegetation and inundation can alternatively be incorporated into the core-level data, whatever makes the most sense for your study design.</p>
+<table>
+<caption>Site Information</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">site_id</td>
+<td align="left">Site identification code unique to each study.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">site_description</td>
+<td align="left">Site description including relevant study details and political geographic units. Some of these descriptions can be automated by the ingestion code.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">site_latitude_max</td>
+<td align="left">Maximum latitude defining a bounding box for the site in decimal degree World Geodedic System of 1984 (WGS84). This can also be generated automatically by the ingestion code.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="odd">
+<td align="left">site_latitude_min</td>
+<td align="left">Minimum latitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="even">
+<td align="left">site_longitude_max</td>
+<td align="left">Maximum longitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="odd">
+<td align="left">site_longitude_min</td>
+<td align="left">Minimum longitude defining a bounding box for the site in decimal degree WGS84. This can also be generated automatically by the ingestion code.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="even">
+<td align="left">site_boundaries</td>
+<td align="left">As an alternative to submitting or automatically generating a bounding box, submitters can include a shapefile (.shp) or keyhole markup language (.kml) documenting the geographic boundaries of the site. This can be converted to and stored in well known text (WTK) format.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">salinity_class</td>
+<td align="left">Code based on submitter field observation or measurement indicating average annual salinity (Note: Palustrine and freshwater should only include tidal wetlands, or wetlands that are potentially/formerly tidal but artificially freshened due to artificial tidal restrictions).</td>
+<td align="left">factor</td>
+<td align="left">estuarine C-CAP = 5-35 parts per thousand salinity (ppt) according to the coastal change analysis program. palustrine C-CAP = &lt; 5 ppt according to the coastal change analysis program. estuarine = 0.5-35 ppt according to most other definitions. palustrine = &lt; 0.5 ppt according to most other definitions. brine = &gt;50 ppt. saline = 30-50 ppt. brackish = 0.5-30 ppt. fresh = &lt;0.5 ppt. mixoeuhaline = 30-40 ppt. polyhaline = 18-30 ppt. mesohaline = 5-18 ppt. oligohaline = 0.5-5 ppt.</td>
+</tr>
+<tr class="even">
+<td align="left">salinity_method</td>
+<td align="left">Indicate whether salinity_class was determined using a field observation or a measurement.</td>
+<td align="left">factor</td>
+<td align="left">field observation = Salinity inferred by field observation such as vegetation. measurement = Salinity observed from local instrument.</td>
+</tr>
+<tr class="odd">
+<td align="left">salinity_notes</td>
+<td align="left">Any relevant submitter generated notes on how salinity_class was determined.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">vegetation_class</td>
+<td align="left">Code based on submitter field observations or measurement indicating dominant wetland vegetation type.</td>
+<td align="left">factor</td>
+<td align="left">emergent = Describes wetlands dominated by persistent emergent vascular plants. scrub shrub = Describes wetlands dominated by woody vegetation &lt;= 5 meters in height. forested = Describes wetlands dominated by woody vegetation &gt; 5 meters in height. FO/SS = Dominated by forested to scrub/shrub biomass. seagrass = Describes tidal or subtidal communities dominated by rooted vascular plants.</td>
+</tr>
+<tr class="odd">
+<td align="left">vegetation_method</td>
+<td align="left">Indicate whether vegetation_class was determined using a field observation or a measurement</td>
+<td align="left">factor</td>
+<td align="left">field observation = Vegetation inferred by field observation. measurement = Vegetation measured by counts or plots.</td>
+</tr>
+<tr class="even">
+<td align="left">vegetation_notes</td>
+<td align="left">Any relevant submitter generated notes on how vegetation_class was were determined</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">inundation_class</td>
+<td align="left">Code based on submitter field observation or measurement indicating how often the coring location is inundated</td>
+<td align="left">factor</td>
+<td align="left">high = Study-specific definition of an elevation relatively high in the tidal frame, typically defined by vegetation type. mid = Study-specific definition of an elevation in the relative middle of the tidal frame, typically defined by vegetation type. low = Study-specific definition of an elevation in relatively low in the tidal frame, typically defined by vegetation type. levee = Study-specific definition of a relatively high elevation zone built up on the edge of a river, creek, or channel. back = Study-specific definition of a relatively low elevation zone behind a levee.</td>
+</tr>
+<tr class="even">
+<td align="left">inundation_method</td>
+<td align="left">Indicate whether inundation_class was determined using a field observation or a measurement</td>
+<td align="left">factor</td>
+<td align="left">field observation = Inundation inferred by field observation such as vegetation. measurement = Inundation class assessed from elevation and nearby tide gauge or other similar method.</td>
+</tr>
+<tr class="odd">
+<td align="left">inundation_notes</td>
+<td align="left">Any relevant submitter generated notes on how inundation was determined</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="core-level" class="section level2">
+<h2>Core Level</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>Note that positional data can be assigned at the core level, or at the site level. However, it is important that this is specified, that site coordinates are not attributed as core coordinates, and that the method of measurement and precision is noted. Vegetation and inundation can alternatively be incorporated into the site-level data, whatever makes the most sense to your study design. In the future this level of hierarchy will be reassesed as the ‘subsite level’ as this level of heirarchy can handle any sublocation information such as vegetation plot, and instrument location and description.</p>
+<table>
+<caption>Core- (or Subsite-) Level Information</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">site_id</td>
+<td align="left">Site identification code unique to each study.</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><b>core_id</b></td>
+<td align="left">Core identification code unique to each site.</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">core_date</td>
+<td align="left">Date of core collection.</td>
+<td align="left">Date</td>
+<td align="left">YYYY-MM-DD</td>
+</tr>
+<tr class="odd">
+<td align="left">core_notes</td>
+<td align="left">Any other relevant submitter generated notes on how cores were collected.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">core_latitude</td>
+<td align="left">Positional latitude of the core in decimal degree WGS84.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="odd">
+<td align="left">core_longitude</td>
+<td align="left">Positional longitude of the core in decimal degree WGS84.</td>
+<td align="left">numeric</td>
+<td align="left">degree</td>
+</tr>
+<tr class="even">
+<td align="left">core_position_accuracy</td>
+<td align="left">Accuracy of latitude and longitude measurement, if determined and recorded.</td>
+<td align="left">numeric</td>
+<td align="left">meter</td>
+</tr>
+<tr class="odd">
+<td align="left">core_position_method</td>
+<td align="left">Code indicating how latitude and longitude were determined.</td>
+<td align="left">factor</td>
+<td align="left">RTK = Real-time kinematic global position system (GPS). handheld = Conventional Commercially available hand-held GPS. other high resolution = Any other technique resulting in positional error &lt; 1 meter. other moderate resolution = Any other technique resulting in positional error &lt; 30 meters. other low resolution = Any other technique resulting in positional error &gt; 30 meters.</td>
+</tr>
+<tr class="even">
+<td align="left">core_position_notes</td>
+<td align="left">Any relevant submitter generated notes on how latitude and longitude were determined.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">core_elevation</td>
+<td align="left">Surface elevation of the core relative to defined datum.</td>
+<td align="left">numeric</td>
+<td align="left">meters</td>
+</tr>
+<tr class="even">
+<td align="left">core_elevation_datum</td>
+<td align="left">The datum relative to which the core elevation was measured against (For a complete list of datum names and aliases please refer to the ISO Geodedic Registry <a href="https://iso.registry.bespire.eu/register/geodetic/VerticalDatum" class="uri">https://iso.registry.bespire.eu/register/geodetic/VerticalDatum</a>).</td>
+<td align="left">factor</td>
+<td align="left">NAVD88 = A gravity-based geodetic datum, North American Vertical Datum of 1988. MSL = A tidal datum, Mean Sea Level as measured against a local tide gauge. MTL = A tidal datum, Mean Tidal Level as measured against a local tide gauge. MHW = A tidal datum, Mean High Water as measured against a local tide gauge. MHHW = A tidal datum, Mean Higher High Water as measured against a local tide gauge. MHHWS = A tidal datum, Mean Higher High Water for Spring Tides as measured against a local tide gauge. MLW = A tidal datum, Mean Low Water as measured against a local tide gauge. MLLW = A tidal datum, Mean Lower Low Water as measured against a local tide gauge.</td>
+</tr>
+<tr class="odd">
+<td align="left">core_elevation_accuracy</td>
+<td align="left">Accuracy of elevation measurement, if determined and recorded</td>
+<td align="left">numeric</td>
+<td align="left">meters</td>
+</tr>
+<tr class="even">
+<td align="left">core_elevation_method</td>
+<td align="left">Code indicating how elevation was determined</td>
+<td align="left">factor</td>
+<td align="left">RTK = Real-time kinematic GPS. other high resolution = Any other technique resulting in positional error &lt; 5 cm of random error. LiDAR = Handheld GPS matched to lidar-based digital elevation model. DEM = Handheld GPS matched to another digital elevation model. other low resolution = Any other technique resulting in positional error &gt; 5 cm of random error.</td>
+</tr>
+<tr class="odd">
+<td align="left">core_elevation_notes</td>
+<td align="left">Any relevant submitter generated notes on how elevation was determined</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">salinity_class</td>
+<td align="left">Code based on submitter field observation or measurement indicating average annual salinity (Note: Palustrine and freshwater should only include tidal wetlands, or wetlands that are potentially/formerly tidal but artificially freshened due to artificial tidal restrictions).</td>
+<td align="left">factor</td>
+<td align="left">estuarine C-CAP = 5-35 parts per thousand salinity (ppt) according to the coastal change analysis program. palustrine C-CAP = &lt; 5 ppt according to the coastal change analysis program. estuarine = 0.5-35 ppt according to most other definitions. palustrine = &lt; 0.5 ppt according to most other definitions. brine = &gt;50 ppt. saline = 30-50 ppt. brackish = 0.5-30 ppt. fresh = &lt;0.5 ppt. mixoeuhaline = 30-40 ppt. polyhaline = 18-30 ppt. mesohaline = 5-18 ppt. oligohaline = 0.5-5 ppt.</td>
+</tr>
+<tr class="odd">
+<td align="left">salinity_method</td>
+<td align="left">Indicate whether salinity_class was determined using a field observation or a measurement</td>
+<td align="left">factor</td>
+<td align="left">field observation = Salinity inferred by field observation such as vegetation. measurement = Salinity observed from local instrument.</td>
+</tr>
+<tr class="even">
+<td align="left">salinity_notes</td>
+<td align="left">Any relevant submitter generated notes on how salinity_class was determined</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">vegetation_class</td>
+<td align="left">Code based on submitter field observations or measurement indicating dominant wetland vegetation type.</td>
+<td align="left">factor</td>
+<td align="left">emergent = Describes wetlands dominated by persistent emergent vascular plants. scrub shrub = Describes wetlands dominated by woody vegetation &lt; 5 meters in height. forested = Describes wetlands dominated by woody vegetation &gt; 5 meters in height. seagrass = Describes tidal or subtidal communities dominated by rooted vascular plants.</td>
+</tr>
+<tr class="even">
+<td align="left">vegetation_method</td>
+<td align="left">Indicate whether vegetation_class was determined using a field observation or a measurement</td>
+<td align="left">factor</td>
+<td align="left">field observation = Vegetation inferred by field observation. measurement = Vegetation measured by counts or plots.</td>
+</tr>
+<tr class="odd">
+<td align="left">vegetation_notes</td>
+<td align="left">Any relevant submitter generated notes on how vegetation_class and dominant_species were determined.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">inundation_class</td>
+<td align="left">Code based on submitter field observation or measurement indicating how often the coring location is inundated.</td>
+<td align="left">factor</td>
+<td align="left">high = Study-specific definition of an elevation relatively high in the tidal frame, typically defined by vegetation type. mid = Study-specific definition of an elevation in the relative middle of the tidal frame, typically defined by vegetation type. low = Study-specific definition of an elevation in relatively low in the tidal frame, typically defined by vegetation type. levee = Study-specific definition of a relatively high elevation zone built up on the edge of a river, creek, or channel. back = Study-specific definition of a relatively low elevation zone behind a levee.</td>
+</tr>
+<tr class="odd">
+<td align="left">inundation_method</td>
+<td align="left">Indicate whether inundation_class was determined using a field observation or a measurement</td>
+<td align="left">factor</td>
+<td align="left">field observation = Inundation inferred by field observation such as vegetation. measurement = Inundation class assesed from elevation and nearby tidegauge or other similar method.</td>
+</tr>
+<tr class="even">
+<td align="left">inundation_notes</td>
+<td align="left">Any relevant submitter generated notes on how elevation was determined</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">core_length_flag</td>
+<td align="left">Indicated whether or not the coring team believes they recovered a full sediment profile, down to bedrock, or other non-marsh interface.</td>
+<td align="left">factor</td>
+<td align="left">core depth limited by length of corer = The total depth of the core was limited by the length of the coring device. core depth represents deposit depth = Authors report that the depth of the core represents the depth of the wetland soil deposit. not specified = Authors did not specify whether or not the depth of the core represents the depth of the wetland soil deposit.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="soil-depth-series" class="section level2">
+<h2>Soil Depth Series</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>This level of hierarchy contains the actual depth series information. At minimum a submission needs to specify minimum and maximum depth increments, dry bulk density, and either fraction organic matter or fraction carbon. Sample ID’s should be used in the case that there are multiple replicants of a measurements. There is plenty of room for recording raw data from various dating techniques as well as age depth models.</p>
+<table>
+<caption>Soil Depth Series Information</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">site_id</td>
+<td align="left">Site identification code unique to each study</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><b>core_id</b></td>
+<td align="left">Core identification code unique to each site</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><b>depth_min</b></td>
+<td align="left">Minimum depth of a sampling increment.</td>
+<td align="left">numeric</td>
+<td align="left">centimeter</td>
+</tr>
+<tr class="odd">
+<td align="left"><b>depth_max</b></td>
+<td align="left">Maximum depth of a sampling increment.</td>
+<td align="left">numeric</td>
+<td align="left">centimeter</td>
+</tr>
+<tr class="even">
+<td align="left">sample_id</td>
+<td align="left">Sample identification unique to the core. This should be used in the case that there are relevant lab specific sample codes, or in the case that there are multiple replicate samples.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><b>dry_bulk_density</b></td>
+<td align="left">Dry mass per unit volume of a soil sample. This does not include ash free bulk density.</td>
+<td align="left">numeric</td>
+<td align="left">gramsPerCubicCentimeter</td>
+</tr>
+<tr class="even">
+<td align="left">fraction_organic_matter</td>
+<td align="left">Mass of organic matter relative to sample dry mass. Ash free bulk density should not be used here but should be expressed as a loss on ignition fraction .</td>
+<td align="left">numeric</td>
+<td align="left">dimensionless</td>
+</tr>
+<tr class="odd">
+<td align="left">fraction_carbon</td>
+<td align="left">Mass of carbon relative to sample dry mass.</td>
+<td align="left">numeric</td>
+<td align="left">dimensionless</td>
+</tr>
+<tr class="even">
+<td align="left">compaction_fraction</td>
+<td align="left">Fraction of the sample depth interval reduced due to compaction.</td>
+<td align="left">numeric</td>
+<td align="left">dimensionless</td>
+</tr>
+<tr class="odd">
+<td align="left">compaction_notes</td>
+<td align="left">Any submitter generated notes on compaction.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">cs137_activity</td>
+<td align="left">Radioactivity counts per unit dry weight for radiocesium (<sup>137</sup>Cs).</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">cs137_activity_sd</td>
+<td align="left">1 standard deviation of uncertainty associated with cs137_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">total_pb210_activity</td>
+<td align="left">Total radioactivity counts per unit dry weight for excess lead 210 (<sup>210</sup>Pb).</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">total_pb210_activity_sd</td>
+<td align="left">1 standard deviation of uncertainty associated with total_pb210_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">ra226_activity</td>
+<td align="left">Total radioactivity counts per unit dry weight for Radium 226 (<sup>226</sup>Ra) if measured as part of the <sup>210</sup>Pb dating process.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">ra226_activity_sd</td>
+<td align="left">1 standard deviation of uncertainty associated with ra226_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">excess_pb210_activity</td>
+<td align="left">Excess radioactivity counts per unit dry weight for excess lead 210 (<sup>210</sup>Pb).</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">excess_pb210_activity_sd</td>
+<td align="left">1 standard deviation of uncertainty associated with excess_pb210_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">c14_age</td>
+<td align="left">Radiocarbon age as estimated from AMS measurements.</td>
+<td align="left">numeric</td>
+<td align="left">radiocarbonYear</td>
+</tr>
+<tr class="odd">
+<td align="left">c14_age_sd</td>
+<td align="left">Estimated uncertainty in c14_age.</td>
+<td align="left">numeric</td>
+<td align="left">radiocarbonYear</td>
+</tr>
+<tr class="even">
+<td align="left">c14_material</td>
+<td align="left">Description of the material selected for radiocarbon (<sup>14</sup>C) dating.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">c14_notes</td>
+<td align="left">Any relevant submitter generated notes on <sup>14</sup>C dating process.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">delta_c13</td>
+<td align="left">The isotopic signature of <sup>13</sup>C. This is oftentimes measured along with c14_age and can be useful for analysing carbon lability and provenance.</td>
+<td align="left">numeric</td>
+<td align="left">partsPerMillion</td>
+</tr>
+<tr class="odd">
+<td align="left">be7_activity</td>
+<td align="left">Radioactivity counts per unit dry weight for <sup>7</sup>Be.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">be7_activity_sd</td>
+<td align="left">Estimated uncertainty in be_7_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">am241_activity</td>
+<td align="left">Radioactivity counts per unit dry weight for <sup>241</sup>Am.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="even">
+<td align="left">am241_activity_sd</td>
+<td align="left">Estimated uncertainty in am_241_activity.</td>
+<td align="left">numeric</td>
+<td align="left">becquerelPerKilogram</td>
+</tr>
+<tr class="odd">
+<td align="left">marker_date</td>
+<td align="left">The age of any other dated depth horizon such as an artificial marker, pollen horizon, pollution horizon, etc.</td>
+<td align="left">Date</td>
+<td align="left">YYYY-MM-DD</td>
+</tr>
+<tr class="even">
+<td align="left">marker_type</td>
+<td align="left">Code indicating the type of marker.</td>
+<td align="left">factor</td>
+<td align="left">artificial horizon = Horizon was added to the surface artificially by using materials such as feldspar, glitter, or rare earth elements. pollen = Pollen analysis was used to tie horizon to the timing of vegetation change such as the arrival of invasives, or the beginning of local agriculture. pollution = Chemical analysis was used to tie the horizon to the timing of a pollution event. tsunami = Sediment analysis was used to tie the horizon to the timing of a tsunami event.</td>
+</tr>
+<tr class="odd">
+<td align="left">marker_notes</td>
+<td align="left">Any other submitter generated notes about the origin of the marker.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">age</td>
+<td align="left">Most likely, median, or mean age of the depth interval from submitter generated age depth model.</td>
+<td align="left">numeric</td>
+<td align="left">year</td>
+</tr>
+<tr class="odd">
+<td align="left">age_min</td>
+<td align="left">Minimum age of the depth interval from submitter generated age depth model.</td>
+<td align="left">numeric</td>
+<td align="left">year</td>
+</tr>
+<tr class="even">
+<td align="left">age_max</td>
+<td align="left">Maximum age of the depth interval from submitter generated age depth model.</td>
+<td align="left">numeric</td>
+<td align="left">year</td>
+</tr>
+<tr class="odd">
+<td align="left">depth_interval_notes</td>
+<td align="left">Any other submitter generated notes specific to the depth interval.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mulitple-special-conditions-at-the-level-of-the-site-or-core" class="section level2">
+<h2>Mulitple Special Conditions at the Level of the Site or Core</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>Becuase there may be multiple observations or conditions that are part of the study, such as species present, or degredation or restoration activities, that can affect a site or core, these are archived separately.</p>
+<div id="dominant-species-present" class="section level3">
+<h3>Dominant Species Present</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>You can record species codes associated with sites and/or cores.</p>
+<table>
+<caption>Species Present at Site or Subsite</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">site_id</td>
+<td align="left">Site identification code unique to each study.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">core_id</td>
+<td align="left">Core identification code unique to each site.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">species_code</td>
+<td align="left">Code associated with a species or a vegetation assemblage.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="anthropogenic-impacts-present" class="section level3">
+<h3>Anthropogenic Impacts Present</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>You can record various codes associated with degredation or restoration conditions at sites and/or cores.</p>
+<table>
+<caption>Anthropogenic Impacts at Site or Subsite</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">site_id</td>
+<td align="left">Site identification code unique to each study.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">core_id</td>
+<td align="left">Core identification code unique to each site.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">impact_class</td>
+<td align="left">Code indicating any major anthropogenic impacts historically and currently affecting the coring location.</td>
+<td align="left">factor</td>
+<td align="left">tidally restricted = Tidal flow is muted or blocked by built structures. impounded = Water level is raised artificially by a tidal restriction, resulting in ponding of water on the wetland and or upland surface. managed impounded = Wetland is impounded seasonally, and other times natural or semi natural hydrology occurs. ditched = Tidal hydrology is altered because artificial ditches have been cut to promote tidal flooding and drainage. diked and drained = The wetland has been diked and drained, with or without flapper gates, pumping, or other means. farmed = Managed impoundment or drainage in which wetland has been converted to agricultural land. tidally restored = Tidal flow has been restored by removing an artificial obstruction. revegetated = Wetland vegetation has been reintroduced by replanting on unvegetated surfaces. invasive plants removed = Natural plant communities have been restored by the active removal of invasive plant species. invasive herbivores removed = Tidal wetland vegetation has been managed by the removal of invasive herbivores. sediment added = Elevation has been managed by artificially adding sediment to the site using techniques such as thin layering or sediment diversion. wetlands built = Constructed wetland using sediments such as dredge spoils or other sediment source.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="submitter-defined-attributes-and-definitions" class="section level2">
+<h2>Submitter Defined Attributes and Definitions</h2>
+<p><a href="#contents">Return to Top</a></p>
+<p>Part of the reason we control these attribute and variable names are so that the dataset does not become unmanageable, and we can deliver products that run cleanly and smoothly to you. However, we know that research is complicated, and not all of the data you want to include can be represented here. As long as it fits within this heirarchy, we allow you to submit user defined attributes.</p>
+<div id="study-level-species-table" class="section level3">
+<h3>Study Level Species Table</h3>
+<p><a href="#contents">Return to Top</a> If species codes or common names are used anywhere in the study, there should be a separate table included defining all names using scientific names.</p>
+<table>
+<caption>Define Species Codes Used</caption>
+<thead>
+<tr class="header">
+<th align="left">attribute name</th>
+<th align="left">definition</th>
+<th align="left">data type</th>
+<th align="left">format, unit or codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><b>study_id</b></td>
+<td align="left">Unique identifier for the study made up of the first author’s family name, as well as the second author’s family name or ‘et al.’ if more than three, then publication year spearated by underscores.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">species_code</td>
+<td align="left">Code associated with a species or a vegetation assembelage.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">genus</td>
+<td align="left">Genus according to the most up to date classification.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">species</td>
+<td align="left">Species according to the most up to date classification.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">sub_species</td>
+<td align="left">Any nomenclature referring to subspecies special cases.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">hybrid</td>
+<td align="left">Any nomenclature referring to special cases of hybridization.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">common_name</td>
+<td align="left">Common name associated with the species, especially if it is referred to in any accompanying text.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">species_notes</td>
+<td align="left">Any other submitter defined notes regarding the species.</td>
+<td align="left">character</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="other-attributes-and-variables" class="section level3">
+<h3>Other Attributes and Variables</h3>
+<p><a href="#contents">Return to Top</a></p>
+<p>Any submitter-defined attributes should be included in a separate table indicating the associated level of heirarchy, attribute name, data type (date, factor, character, or numeric). Attribute names should follow good naming practices: self-descriptive, don’t start with a number or special character, no spaces. Dates should be stored as a character string and should have an accompanying ‘string format’ indicating the position, number of digits and deliminators for the date time. For example June twenty-sixth two-thousand eighteen written as 2018-06-26 would be formatted as ‘YYYY-MM-DD’. <a href="https://www.w3.org/TR/NOTE-datetime" target="_blank">Here is a handy dateTime reference</a>. Numeric values should have their units defined. Factors (i.e. categorical variables) should be defined in a separate table.</p>
+<table style="width:86%;">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="30%" />
+<col width="13%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">level of heirarchy</th>
+<th align="left">attribute name</th>
+<th align="left">description</th>
+<th align="left">data Type</th>
+<th align="left">format, unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex. site level or core level</td>
+<td align="left">(your column name here. [use good naming conventions])</td>
+<td align="left">(describe your attribute here.)</td>
+<td align="left">Date, factor, character, or numeric</td>
+<td align="left">(extra necessary info here)</td>
+</tr>
+</tbody>
+</table>
+<p>Variable names, like attribute names, should be self-descriptive. Such as ‘experimental’ or ‘control’ as opposed to ‘1’ and ‘2’.</p>
+<table style="width:67%;">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="30%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">level of heirarchy</th>
+<th align="left">attribute name</th>
+<th align="left">categorical variable name</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex. site level or core level</td>
+<td align="left">(parent column name here)</td>
+<td align="left">(your variable name here.)</td>
+<td align="left">(describe your variable)</td>
+</tr>
+</tbody>
+</table>
+<div id="thats-it" class="section level4">
+<h4>That’s It</h4>
+<p>You now know everything there is to know about soil carbon data management.</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
