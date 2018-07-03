@@ -1,7 +1,8 @@
 ---
 title: "Principles and Governance"
-output: 
-  html_document
+subtitle: "Version 1"
+date: "3 July 2018"
+output: html_document
 ---
 
 <script>

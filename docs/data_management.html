@@ -202,7 +202,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Data Management Plan</h1>
-<h3 class="subtitle"><em>Naming Conventions for Attributes and Variables (Version 1)</em></h3>
+<h3 class="subtitle"><em>Version 1</em></h3>
 <h4 class="date"><em>3 July 2018</em></h4>
 
 </div>
@@ -262,7 +262,7 @@ $(document).ready(function () {
 <div id="hierarchical-structure" class="section level3">
 <h3>Hierarchical Structure</h3>
 <p><a href="#contents">Return to Top</a></p>
-<p>We will ingest existing data and curate submitted data in a hierarchical framework. Information associated with submitters, projects, sites, cores, and depth profiles will all be hosted in separate tables related by index codes that are unique. A universal dataset index will be composed of the principal investigator’s family name, as well as the second author or ‘et al’ in the case of more than two authors, then the publication year. Capital letters will be added in case of multiple publications per year (Example: Jane Doe, Lee Fakeman and Ben Mademup’s 2009 paper = Doe_et_al_2009).</p>
+<p>We will ingest existing data and curate submitted data in a hierarchical framework. Information associated with submitters, projects, sites, cores, and depth profiles will all be hosted in separate tables related by index codes that are unique. A universal dataset index will be composed of the principal investigator’s family name, as well as the second author or ‘et al’ in the case of more than two authors, then the publication year. Sequential letters will be added to the end (a,b,c, etc.) in case of multiple publications per year (Example: Jane Doe, Lee Fakeman and Ben Mademup’s 2009 paper = Doe_et_al_2009).</p>
 <p><strong>Project metadata</strong> will have an abstract and information about coauthors, associated funding source, or set of funding sources, associated publications, and materials and methods. A project should be a discrete unit of research united by consistent personnel, funding sources, and/or materials and methods. A project can be associated with one or more sites.</p>
 <p><strong>Sites</strong> refer to discrete geographic or management units and are somewhat nebulous, project specific, and submitter defined. A site code should follow the same best practices for variable naming: not starting with a number, descriptive, brief, and meaningful to project documentation and design. Site metadata refer to data associated with the sites, such as location, notes on dominant vegetation types, salinity, and site condition. Although there are no standards for what constitutes a site, and different projects could have different names for the same site, this coding should be consistent within a project. A site can have one or more data sets, including one or more core, plot, or instrument locations.</p>
 <p><strong>Core/Plot/Instrument-Level Data</strong> refer to information specifically about the location of a soil core. This could include positional information such as latitude, longitude, and elevation. It could also include notes that are redundant but more detailed than site metadata, such as vegetation and salinity. Each core should have a unique code within a project. A core code should follow the same best practices for variable naming: not starting with a number, descriptive, brief, and meaningful to project documentation and design. For future syntheses this level of hierarchy could also house other types of data such as vegetation plots or instruments.</p>
